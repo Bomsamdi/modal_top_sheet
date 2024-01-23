@@ -7,6 +7,10 @@
 
 [ModalTopSheet] A Flutter package for creating top-aligned modal sheets. This package not extends the modal sheet functionality in Flutter to allow for a more flexible and customizable user interface. The effect is like [AppBar] dropdown for example.
 
+## Features
+
+https://github.com/Bomsamdi/modal_top_sheet/assets/94292009/4612353d-3f33-4dc1-ac31-621fdccec81d
+
 ## Installation
 
 Include your package in your `pubspec.yaml` file:
