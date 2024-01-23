@@ -1,39 +1,120 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# ModalTopSheet
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+[![Pub](https://img.shields.io/pub/v/modal_top_sheet.svg)](https://pub.dev/packages/modal_top_sheet)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![pub points](https://img.shields.io/pub/points/modal_top_sheet)](https://pub.dev/packages/modal_top_sheet/score) 
+[![popularity](https://img.shields.io/pub/popularity/modal_top_sheet)](https://pub.dev/packages/modal_top_sheet/score)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+[ModalTopSheet] A Flutter package for creating top-aligned modal sheets. This package not extends the modal sheet functionality in Flutter to allow for a more flexible and customizable user interface. The effect is like [AppBar] dropdown for example.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Installation
 
-## Features
+Include your package in your `pubspec.yaml` file:
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```yaml
+dependencies:
+  modal_top_sheet: ^0.0.1
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:modal_top_sheet/modal_top_sheet.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.black,
+          elevation: 0,
+        ),
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void openModal() async => showModalTopSheet(
+        context,
+        isDismissible: false,
+        child: const YourModalWidget(),
+      );
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBarWithSubtitle(
+        titleSection: InkWell(
+            onTap: openModal,
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Top Modal Sheet Example',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ),
+                Text(
+                  'Tap to expand',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            )),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverList.builder(
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Item $index'),
+              );
+            },
+            itemCount: 20,
+          ),
+        ],
+      ),
+    );
+  }
+}
 ```
 
-## Additional information
+Full example usage in `/example` folder.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Issues and Bugs
+
+Report any issues or bugs on the GitHub issues page.
+
+## License
+
+This package is licensed under the MIT License.
+
+## Support
+
+For any questions or assistance, please contact the author.
